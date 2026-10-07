@@ -18,7 +18,7 @@ window.KIT = {
   welcomeVideo: "",               // paste a YouTube link for a short welcome video (optional)
 
   // ---- Your links ----
-  substack: "https://substack.com", // replace with your Substack link
+  substack: "https://bendixschroeder.substack.com/", // replace with your Substack link
   instagram: "https://instagram.com/bendix.schroeder",
 
   // ---- Video lessons (shown in this order) ----
