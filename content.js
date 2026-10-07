@@ -94,15 +94,13 @@ window.KIT = {
   ],
 
   // ---- Community (Discord) ----
-  // invite:    your Discord invite link (set it to "Never expire")
-  // serverId / channelId: turn on Developer Mode in Discord (Settings → Advanced),
-  //   right-click the server icon → Copy Server ID, right-click a channel → Copy Channel ID.
-  //   With both filled in (and the WidgetBot bot added to your server), a live chat window
-  //   shows up on the website. Leave them empty to only show the Join button.
+  // invite:   your Discord invite link, set to "Never expire" (e.g. "https://discord.gg/abc123")
+  // serverId: optional. In Discord turn on Developer Mode (Settings → Advanced),
+  //           right-click the server icon → Copy Server ID. Adds an "Open the community"
+  //           button for players who already joined.
   community: {
     invite: "",
     serverId: "",
-    channelId: "",
     intro: "This is where players who take the mental side seriously hang out. Ask me anything, share how your last match went, and learn from players who deal with the same nerves you do.",
     channels: [
       ["introduce-yourself", "Who you are, where you play, and what you want to get better at."],
