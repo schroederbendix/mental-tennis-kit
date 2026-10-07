@@ -20,7 +20,7 @@ window.KIT = {
   promise: "Your promise goes here. One sentence about what you’ll be able to do on court after this kit.",
   coach: "Bendix Schroeder",
   hello: "Hey, I’m Bendix. I played four years of college tennis, two of them as captain, and I lost more matches in my head than on the court. Now I coach at Emporia State and help players with the part nobody trains: what happens between the points. This kit is everything I wish someone had handed me as a freshman.",
-  photo: "",                      // e.g. "bendix.jpg" after you upload it
+  photo: "bendix.jpg",            // your photo file in the repository
   welcomeVideo: "",               // optional YouTube link for a short welcome video
 
   // ---- Your links ----
