@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The Mental Tennis Kit</title>
+<meta name="description" content="Free mental tennis training: video lessons, on-court exercises and a match journal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one column, chapters stacked (hero, lessons, exercises, journal); sticky chapter nav; works from 360px up */
+:root{
+  --bg:#F2F3F7; --surface:#FFFFFF; --sunk:#F6F7FB; --ink:#141A2B; --muted:#5B6278; --line:#DCDFE9;
+  --focus:#3B47C4; --focus-soft:#E4E6FA; --ball:#E3EE5C; --on-ball:#141A2B; --good:#2C7A52;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0E1220; --surface:#161B2D; --sunk:#121726; --ink:#E7EAF3; --muted:#9AA1B8; --line:#272E45;
+  --focus:#9099F3; --focus-soft:#1F2647; --good:#5CC18D; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;padding-bottom:env(safe-area-inset-bottom,0px)}
+.wrap{max-width:860px;margin:0 auto;padding-inline:16px}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+a{color:var(--focus)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* hero */
+.hero{background:var(--ink);color:#F3F4F8;padding-top:env(safe-area-inset-top,0px)}
+.hero .wrap{padding-block:48px 40px;display:grid;gap:14px}
+.eyebrow{font-family:var(--display);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--ball)}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,10vw,84px);line-height:.92;margin:0;letter-spacing:.005em;text-wrap:balance}
+.hero p.promise{font-size:clamp(18px,3.4vw,22px);max-width:34ch;margin:0;color:#D6D9E6}
+.coach{display:flex;gap:12px;align-items:center;margin-top:6px;font-size:14px;color:#B9BED0}
+.coach b{color:#F3F4F8}
+.dot{width:40px;height:40px;border-radius:50%;background:var(--ball);color:var(--on-ball);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:20px;flex:none}
+.ballline{height:6px;background:repeating-linear-gradient(90deg,var(--ball) 0 18px,transparent 18px 30px)}
+
+/* nav */
+nav.chap{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+nav.chap .wrap{display:flex;gap:4px;overflow-x:auto;padding-block:10px}
+nav.chap a{text-decoration:none;color:var(--muted);font-weight:600;font-size:14px;padding:7px 12px;border-radius:999px;white-space:nowrap}
+nav.chap a:hover{color:var(--ink);background:var(--surface)}
+
+section.ch{padding-block:40px 8px;scroll-margin-top:60px}
+.chh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.chh h2{font-family:var(--display);font-weight:700;font-size:clamp(32px,6vw,44px);line-height:1;margin:0}
+.chh .meta{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
+.lead{color:var(--muted);margin:-6px 0 18px;max-width:60ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.stack{display:grid;gap:14px}
+
+/* video */
+.vid{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:10px;overflow:hidden;background:var(--sunk);border:1px solid var(--line)}
+.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.soon{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-weight:600;padding:16px}
+.soon span{display:block;font-family:var(--display);font-size:22px;color:var(--ink)}
+.lesson{display:grid;gap:12px}
+.lesson .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.lesson h3{margin:0;font-size:19px;line-height:1.25}
+.lesson .min{color:var(--muted);font-size:13px;white-space:nowrap}
+.todo{background:var(--focus-soft);border-radius:10px;padding:10px 12px;font-size:15px}
+.todo b{color:var(--focus)}
+.watch{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:600;font-size:14px}
+.watch[aria-pressed="true"]{background:var(--ball);border-color:var(--ball);color:var(--on-ball)}
+.prog{height:8px;border-radius:4px;background:var(--focus-soft);overflow:hidden;min-width:120px;flex:1;max-width:220px}
+.prog i{display:block;height:100%;background:var(--focus)}
+
+/* exercises */
+.ex{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.ex .card h3{margin:0 0 4px;font-size:18px}
+.ex .when{font-size:13px;color:var(--muted);margin-bottom:10px}
+.ex ol{margin:0;padding-left:20px;display:grid;gap:6px}
+
+/* journal */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.fgrid{grid-template-columns:1fr}}
+label.f{display:grid;gap:5px;font-size:14px;font-weight:600}
+.field{width:100%;min-width:0;border:1px solid var(--line);background:var(--sunk);border-radius:10px;padding:10px 12px}
+textarea.field{min-height:84px;resize:vertical;line-height:1.5}
+.field:focus{border-color:var(--focus);outline:none}
+.scale{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:4px}
+.scale button{border:1.5px solid var(--line);background:var(--surface);border-radius:8px;padding:10px 0;font-weight:700;font-variant-numeric:tabular-nums}
+.scale button[aria-pressed="true"]{background:var(--focus);border-color:var(--focus);color:var(--surface)}
+.sdesc{font-size:14px;color:var(--muted);min-height:1.5em}
+details.legend{font-size:14px;color:var(--muted)}
+details.legend summary{cursor:pointer;font-weight:600;color:var(--ink)}
+details.legend li{margin:2px 0}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 16px;font-weight:700}
+.btn.primary{background:var(--focus);border-color:var(--focus);color:#fff}
+.btn.ghost{background:none;border-color:transparent;color:var(--muted);padding:6px 8px;font-weight:600}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stats div{background:var(--sunk);border-radius:10px;padding:10px 12px}
+.stats b{display:block;font-family:var(--display);font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.stats span{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.entry{border-top:1px solid var(--line);padding:14px 0;display:grid;gap:6px}
+.entry:first-child{border-top:0}
+.entry .h{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.entry .r{font-family:var(--display);font-weight:700;font-size:24px;color:var(--focus)}
+.entry p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
+.entry .q{font-size:13px;color:var(--muted);font-weight:600}
+.chart svg{display:block;width:100%;height:auto}
+footer{padding-block:48px 56px;color:var(--muted);font-size:14px}
+footer .cta{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-bottom:20px;color:var(--ink)}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:14px;max-width:calc(100% - 32px);z-index:20}
+</style>
+<script src="content.js"></script>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Free · Mental Tennis Coaching</div>
+  <h1 id="title"></h1>
+  <p class="promise" id="promise"></p>
+  <div class="coach"><span class="dot" id="initial">B</span><span><b id="coachname"></b><br><span id="coachline"></span></span></div>
+  <div id="welcome"></div>
+</div><div class="ballline" aria-hidden="true"></div></header>
+
+<nav class="chap" aria-label="Chapters"><div class="wrap"><a href="#lessons">Video lessons</a><a href="#exercises">Exercises</a><a href="#journal">Match journal</a></div></nav>
+
+<main class="wrap">
+  <section class="ch" id="lessons">
+    <div class="chh"><h2>Video lessons</h2><div class="row"><span class="meta" id="progtxt"></span><span class="prog"><i id="progbar"></i></span></div></div>
+    <p class="lead">Watch one lesson, try the task in your next practice, then journal about it. New lessons get added over time.</p>
+    <div class="stack" id="lessonlist"></div>
+  </section>
+
+  <section class="ch" id="exercises">
+    <div class="chh"><h2>Exercises</h2></div>
+    <p class="lead">Short routines you can use on court, in practice and in matches.</p>
+    <div class="ex" id="exlist"></div>
+  </section>
+
+  <section class="ch" id="journal">
+    <div class="chh"><h2>Match journal</h2><span class="meta" id="jfocus"></span></div>
+    <p class="lead">Two minutes after every practice or match. Your entries stay private on this device. Nobody else, including the coach, can see them.</p>
+    <div class="card stack">
+      <div class="fgrid">
+        <label class="f">Date<input class="field" type="date" id="j-date"></label>
+        <label class="f">Practice or match<select class="field" id="j-type"><option>Practice</option><option>Match</option></select></label>
+      </div>
+      <div class="stack" style="gap:8px">
+        <span style="font-weight:600;font-size:14px">How well did you stay present? (0–10)</span>
+        <div class="scale" id="scale" role="group" aria-label="Rating from 0 to 10"></div>
+        <div class="sdesc" id="sdesc">Tap a number.</div>
+        <details class="legend"><summary>What the numbers mean</summary><ul id="legend"></ul></details>
+      </div>
+      <div class="stack" id="qs"></div>
+      <div class="row"><button class="btn primary" id="j-save">Save entry</button><span class="meta" id="j-msg" style="color:var(--muted);font-size:14px"></span></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="stats" id="jstats"></div>
+      <div class="chart" id="jchart" style="margin-top:14px"></div>
+      <div id="jlist" style="margin-top:8px"></div>
+      <div class="row" style="margin-top:12px"><button class="btn" id="j-export">Download my journal</button></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <div class="cta"><span><b>Want more?</b> New lessons and mental training ideas go out in the newsletter first.</span><a class="btn primary" id="sublink" href="#" target="_blank" rel="noopener" style="text-decoration:none">Read the newsletter</a></div>
+  <div>Made by <span id="fcoach"></span> · <a id="iglink" href="#" target="_blank" rel="noopener">Instagram</a></div>
+</footer>
+<div id="toast" hidden></div>
+
+<script>
+(function(){
+const K=window.KIT||{}, $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+const toastEl=$('toast');function toast(m){toastEl.textContent=m;toastEl.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>toastEl.hidden=true,3000)}
+const pad=n=>String(n).padStart(2,'0');const today=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
+const fmt=k=>{const [y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'})};
+function ytId(u){u=String(u||'').trim();if(!u)return '';const m=u.match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/|\/live\/)([A-Za-z0-9_-]{11})/);if(m)return m[1];return /^[A-Za-z0-9_-]{11}$/.test(u)?u:''}
+function video(u,title){const id=ytId(u);return `<div class="vid">${id?`<iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${esc(title)}" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>`:`<div class="soon"><div><span>Video coming soon</span>Check back after the next newsletter.</div></div>`}</div>`}
+
+/* hero */
+document.title=K.title||document.title;
+$('title').textContent=K.title||'';$('promise').textContent=K.promise||'';
+$('coachname').textContent=K.coach||'';$('coachline').textContent=K.coachLine||'';$('fcoach').textContent=K.coach||'';
+$('initial').textContent=(K.coach||'B').trim().charAt(0);
+if(ytId(K.welcomeVideo))$('welcome').innerHTML=`<div style="margin-top:10px;max-width:640px">${video(K.welcomeVideo,'Welcome')}</div>`;
+if(K.substack)$('sublink').href=K.substack;if(K.instagram)$('iglink').href=K.instagram;
+
+/* lessons */
+const L=K.lessons||[];let watched=store.get('mtc-watched',{});
+function lkey(l,i){return (l.title||'')+'|'+i}
+function renderLessons(){
+  $('lessonlist').innerHTML=L.map((l,i)=>{const k=lkey(l,i),w=!!watched[k];return `<article class="card lesson"><div class="top"><h3>${esc(l.title)}</h3><span class="min">${l.minutes?esc(l.minutes)+' min':''}</span></div>
+    ${video(l.video,l.title)}${l.summary?`<p style="margin:0">${esc(l.summary)}</p>`:''}${l.todo?`<div class="todo"><b>Try it:</b> ${esc(l.todo)}</div>`:''}
+    <div><button class="watch" data-k="${esc(k)}" aria-pressed="${w}">${w?'✓ Watched':'Mark as watched'}</button></div></article>`}).join('')||'<p class="lead">Lessons are on the way.</p>';
+  const n=L.filter((l,i)=>watched[lkey(l,i)]).length;$('progtxt').textContent=`${n} of ${L.length} watched`;$('progbar').style.width=(L.length?n/L.length*100:0)+'%';
+}
+$('lessonlist').addEventListener('click',e=>{const b=e.target.closest('.watch');if(!b)return;const k=b.dataset.k;watched[k]=!watched[k];if(!watched[k])delete watched[k];store.set('mtc-watched',watched);renderLessons()});
+renderLessons();
+
+/* exercises */
+$('exlist').innerHTML=(K.exercises||[]).map(x=>`<div class="card"><h3>${esc(x.title)}</h3>${x.when?`<div class="when">${esc(x.when)}</div>`:''}<ol>${(x.steps||[]).map(s=>`<li>${esc(s)}</li>`).join('')}</ol></div>`).join('');
+
+/* journal */
+const J=K.journal||{},Q=J.questions||[],S=(J.scale||[]).slice().sort((a,b)=>b[0]-a[0]);
+$('jfocus').textContent=J.focus?'Focus: '+J.focus:'';
+$('legend').innerHTML=S.map(([n,t])=>`<li><b>${n}</b> · ${esc(t)}</li>`).join('');
+function scaleText(v){const s=S.find(x=>v>=x[0]);return s?s[1]:''}
+let rating=null;
+$('scale').innerHTML=Array.from({length:11},(_,i)=>`<button type="button" data-v="${i}" aria-pressed="false" aria-label="${i}">${i}</button>`).join('');
+$('scale').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;rating=+b.dataset.v;[...$('scale').children].forEach(x=>x.setAttribute('aria-pressed',String(+x.dataset.v===rating)));$('sdesc').textContent=scaleText(rating)});
+$('qs').innerHTML=Q.map((q,i)=>`<label class="f">${esc(q)}<textarea class="field" id="j-q${i}"></textarea></label>`).join('');
+$('j-date').value=today();
+const draft=store.get('mtc-draft',null);if(draft){Q.forEach((q,i)=>{const el=$('j-q'+i);if(el&&draft['q'+i])el.value=draft['q'+i]})}
+$('qs').addEventListener('input',()=>{const d={};Q.forEach((q,i)=>d['q'+i]=$('j-q'+i).value);store.set('mtc-draft',d)});
+let entries=store.get('mtc-journal',[]);
+function renderJournal(){
+  const E=entries.slice().sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:(b.t||0)-(a.t||0));
+  const avg=E.length?E.reduce((s,e)=>s+e.rating,0)/E.length:0,last5=E.slice(0,5),avg5=last5.length?last5.reduce((s,e)=>s+e.rating,0)/last5.length:0;
+  $('jstats').innerHTML=`<div><span>Entries</span><b>${E.length}</b></div><div><span>Average</span><b>${E.length?avg.toFixed(1):'–'}</b></div><div><span>Last 5</span><b>${E.length?avg5.toFixed(1):'–'}</b></div>`;
+  const C=E.slice(0,20).reverse();
+  if(C.length>1){const W=600,H=150,P=24,X=i=>P+i*(W-2*P)/(C.length-1),Y=v=>H-20-(v/10)*(H-36);
+    const pts=C.map((e,i)=>X(i).toFixed(1)+','+Y(e.rating).toFixed(1)).join(' ');
+    $('jchart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Your ratings over time">${[0,5,10].map(v=>`<line x1="${P}" x2="${W-P}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--line)"/><text x="${P-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${v}</text>`).join('')}<polyline points="${pts}" fill="none" stroke="var(--focus)" stroke-width="2.4" stroke-linejoin="round"/>${C.map((e,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(e.rating).toFixed(1)}" r="${e.type==='Match'?5:3.5}" fill="${e.type==='Match'?'var(--ball)':'var(--focus)'}" stroke="var(--focus)" stroke-width="1.5"><title>${esc(fmt(e.date))}: ${e.rating}</title></circle>`).join('')}</svg><div class="meta" style="color:var(--muted);font-size:13px">Your last ${C.length} entries. Yellow dots are matches.</div>`}
+  else $('jchart').innerHTML='';
+  $('jlist').innerHTML=E.length?E.map(e=>`<div class="entry"><div class="h"><span><b>${esc(fmt(e.date))}</b> · ${esc(e.type)}</span><span class="row" style="gap:6px"><span class="r">${e.rating}/10</span><button class="btn ghost" data-del="${e.id}" aria-label="Delete entry">Delete</button></span></div>
+    ${Q.map((q,i)=>e.a&&e.a[i]?`<div><div class="q">${esc(q)}</div><p>${esc(e.a[i])}</p></div>`:'').join('')}</div>`).join(''):'<p class="lead" style="margin:0">Your saved entries show up here.</p>';
+}
+$('j-save').addEventListener('click',()=>{
+  if(rating==null){toast('Pick a rating from 0 to 10 first.');return}
+  const e={id:Math.random().toString(36).slice(2,10),t:Date.now(),date:$('j-date').value||today(),type:$('j-type').value,rating,a:Q.map((q,i)=>$('j-q'+i).value.trim())};
+  entries.push(e);if(!store.set('mtc-journal',entries)){toast('Your browser blocked saving. Try a normal (not private) window.');return}
+  Q.forEach((q,i)=>$('j-q'+i).value='');store.set('mtc-draft',null);rating=null;[...$('scale').children].forEach(x=>x.setAttribute('aria-pressed','false'));$('sdesc').textContent='Tap a number.';
+  renderJournal();toast('Entry saved.');
+});
+$('jlist').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;if(!b.dataset.sure){b.dataset.sure='1';b.textContent='Tap again to delete';return}entries=entries.filter(x=>x.id!==b.dataset.del);store.set('mtc-journal',entries);renderJournal()});
+$('j-export').addEventListener('click',()=>{
+  if(!entries.length){toast('No entries yet.');return}
+  const txt=entries.slice().sort((a,b)=>a.date<b.date?-1:1).map(e=>`${fmt(e.date)} · ${e.type} · ${e.rating}/10\n`+Q.map((q,i)=>e.a&&e.a[i]?`${q}\n${e.a[i]}\n`:'').join('')).join('\n----------\n\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain'}));a.download='my-tennis-journal.txt';document.body.appendChild(a);a.click();a.remove();
+});
+renderJournal();
+})();
+</script>
+</body>
+</html>
