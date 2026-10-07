@@ -6,6 +6,8 @@
 <title>The Mental Tennis Kit</title>
 <meta name="description" content="Free mental tennis training from Bendix Schroeder: a video classroom, on-court routines and a match journal.">
 <meta name="theme-color" content="#000000">
+<link rel="icon" href="brand/mtc-profile-picture.png">
+<meta property="og:image" content="brand/mtc-banner-navy.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
@@ -42,9 +44,11 @@ h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.025em;margi
 /* top bar */
 .bar{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule);padding-top:env(safe-area-inset-top,0px)}
 .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap}
-.mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--line)}
+.mark{display:inline-grid;gap:4px;text-decoration:none;color:var(--line);padding-block:8px}
+.mtop{display:flex;align-items:center;gap:8px}
 .mark svg{display:block}
-.mark span{font-family:var(--display);font-size:23px;font-weight:900;letter-spacing:.04em}
+.mw{font-family:var(--display);font-size:29px;font-weight:900;letter-spacing:.02em;line-height:.8}
+.msub{font-family:var(--display);font-weight:800;font-size:7.6px;letter-spacing:.3em;margin-right:-.3em;white-space:nowrap}
 .tabs{display:flex;gap:2px;overflow-x:auto;max-width:100%}
 .tabs a{text-decoration:none;color:var(--mute);font-weight:600;font-size:15px;padding:18px 12px 16px;border-bottom:2px solid transparent;white-space:nowrap}
 .tabs a:hover{color:var(--line)}
@@ -185,9 +189,9 @@ footer .fin{font-family:var(--display);font-weight:800;font-size:26px;color:var(
 </head>
 <body>
 <header class="bar"><div class="wrap">
-  <a class="mark" href="#classroom" aria-label="MTC home">
-    <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" fill="none" stroke="#FFFFFF" stroke-width="2.4"/><path d="M15 1v17M1 18h28" stroke="#FFFFFF" stroke-width="2.4"/><circle cx="22" cy="24" r="2.6" fill="#D7EF4F"/></svg>
-    <span>MTC</span>
+  <a class="mark" href="#classroom" aria-label="MTC, Mental Tennis Coaching, home">
+    <span class="mtop"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1.2" y="1.2" width="27.6" height="27.6" fill="none" stroke="#FFFFFF" stroke-width="2.4"/><path d="M15 1v17M1 18h28" stroke="#FFFFFF" stroke-width="2.4"/><circle cx="22" cy="24" r="2.6" fill="#D7EF4F"/></svg><span class="mw">MTC</span></span>
+    <span class="msub">MENTAL TENNIS COACHING</span>
   </a>
   <nav class="tabs" aria-label="Sections"><a href="#classroom" data-tab="classroom">Classroom</a><a href="#routines" data-tab="routines">Routines</a><a href="#journal" data-tab="journal">Journal</a></nav>
 </div></header>
