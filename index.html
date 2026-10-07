@@ -147,22 +147,33 @@ h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:-.025em;margi
 .badge.got{border-style:solid;border-color:rgba(215,239,79,.45);background:rgba(215,239,79,.06)}
 .badge.got .ic{background:var(--ball);border-color:var(--ball);color:var(--night)}
 .badge.got b{color:var(--line)}
-.jgrid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:22px;align-items:start}
-@media (max-width:860px){.jgrid{grid-template-columns:1fr}}
-.panel{background:var(--deep);border-radius:18px;padding:24px;display:grid;gap:18px;min-width:0}
-.panel h3{font-size:26px}
+.jgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:start;border-top:1px solid var(--rule);padding-top:36px}
+@media (max-width:860px){.jgrid{grid-template-columns:1fr;gap:48px}}
+.jform,.jlist{display:grid;gap:34px;min-width:0;align-content:start}
+.jlist{gap:18px}
+.jform h3,.jlist h3{font-size:30px}
+.jmeta{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin-top:-14px}
+.seg{display:inline-flex;border:1px solid var(--rule);border-radius:999px;padding:3px}
+.seg button{border:0;background:none;color:var(--mute);font-weight:600;font-size:15px;padding:8px 18px;border-radius:999px}
+.seg button[aria-pressed="true"]{background:var(--line);color:#000}
+.jdate{display:flex;align-items:center;gap:10px;font-size:15px}
+.jdate input{background:transparent;border:0;border-bottom:1px solid var(--rule);color:var(--line);padding:6px 0;font-size:15px;color-scheme:dark}
+.jdate input:focus{outline:none;border-bottom-color:var(--line)}
+.qb{display:grid;gap:12px}
+.qt{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.25;letter-spacing:-.01em}
+.line{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.24);color:var(--line);padding:6px 0 10px;font-size:17px;line-height:1.55;resize:vertical;min-height:84px}
+.line::placeholder{color:rgba(166,177,200,.55)}
+.line:focus{outline:none;border-bottom-color:var(--line)}
+.ends{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-top:-4px}
 .f{display:grid;gap:7px;font-size:15px;font-weight:600}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field{width:100%;min-width:0;background:var(--night);border:1px solid var(--rule);border-radius:10px;padding:11px 13px;color:var(--line)}
 .field:focus{border-color:var(--court-hi);outline:none}
 textarea.field{min-height:92px;resize:vertical;line-height:1.5}
 .scale{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:4px}
-.scale button{border:1px solid var(--rule);background:var(--night);border-radius:8px;padding:11px 0;font-weight:700;font-variant-numeric:tabular-nums}
+.scale button{border:1px solid var(--rule);background:transparent;border-radius:10px;padding:12px 0;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums}
+.scale button:hover{border-color:rgba(255,255,255,.4)}
 .scale button[aria-pressed="true"]{background:var(--ball);border-color:var(--ball);color:#000}
 .sdesc{color:var(--mute);font-size:15px;min-height:1.5em}
-details.legend{color:var(--mute);font-size:15px}
-details.legend summary{cursor:pointer;color:var(--line);font-weight:600}
-details.legend ul{padding-left:18px;margin:8px 0 0}
 .chart svg{display:block;width:100%;height:auto}
 .entry{border-top:1px solid var(--rule);padding-block:16px;display:grid;gap:8px}
 .entry:first-of-type{border-top:0;padding-top:4px}
@@ -277,7 +288,7 @@ function viewRoutines(){
 
 /* ----- journal + streaks + badges ----- */
 const J=K.journal||{},Q=J.questions||[],S=(J.scale||[]).slice().sort((a,b)=>b[0]-a[0]);
-let entries=store.get('mtc-journal',[]), rating=null;
+let entries=store.get('mtc-journal',[]), rating=null, jtype='Practice';
 const scaleText=v=>{const s=S.find(x=>v>=x[0]);return s?s[1]:''};
 function dayset(){return new Set(entries.map(e=>e.date))}
 function streaks(){const D=dayset();let cur=0,k=today();if(!D.has(k))k=addDays(k,-1);while(D.has(k)){cur++;k=addDays(k,-1)}
@@ -310,16 +321,17 @@ function viewJournal(){
       <div class="days" aria-label="Last 7 days">${last7.map(d=>`<span class="${D.has(d)?'on':''}${d===t?' today':''}" title="${esc(fmt(d))}">${'SMTWTFS'[parse(d).getDay()]}</span>`).join('')}</div></div></div>
     <div class="badges">${BADGES.map(b=>{const g=b.test();return `<div class="badge${g?' got':''}"><span class="ic" aria-hidden="true">${g?esc(b.ic):''}</span><b>${esc(b.name)}</b><small>${g?'Earned':esc(b.hint)}</small></div>`}).join('')}</div>
     <div class="jgrid">
-      <div class="panel"><h3>Today’s entry</h3>
-        <div class="two"><label class="f">Date<input class="field" type="date" id="j-date" value="${today()}"></label><label class="f">Practice or match<select class="field" id="j-type"><option>Practice</option><option>Match</option></select></label></div>
-        <div style="display:grid;gap:8px"><span class="f" id="scale-label">How well did you stay present? 0 to 10</span>
+      <div class="jform"><h3>Today’s entry</h3>
+        <div class="jmeta"><div class="seg" role="group" aria-label="Practice or match">${['Practice','Match'].map(t=>`<button type="button" data-type="${t}" aria-pressed="${jtype===t}">${t}</button>`).join('')}</div>
+          <label class="jdate"><span class="mute">Date</span><input type="date" id="j-date" value="${today()}"></label></div>
+        <div class="qb"><div class="qt" id="scale-label">How present were you today?</div>
           <div class="scale" role="group" aria-labelledby="scale-label">${Array.from({length:11},(_,i)=>`<button type="button" data-v="${i}" aria-pressed="${rating===i}">${i}</button>`).join('')}</div>
-          <div class="sdesc" id="sdesc">${rating==null?'Tap a number.':esc(scaleText(rating))}</div>
-          <details class="legend"><summary>What the numbers mean</summary><ul>${S.map(([n,t])=>`<li><b>${n}</b>: ${esc(t)}</li>`).join('')}</ul></details></div>
-        ${Q.map((q,i)=>`<label class="f">${esc(q)}<textarea class="field" id="j-q${i}" data-q="${i}">${esc((store.get('mtc-draft',{})||{})['q'+i]||'')}</textarea></label>`).join('')}
+          <div class="ends"><span>Not at all</span><span>Every point</span></div>
+          <div class="sdesc" id="sdesc">${rating==null?'Tap a number. 10 means every point was its own point.':esc(scaleText(rating))}</div></div>
+        ${Q.map((q,i)=>`<label class="qb"><span class="qt">${esc(q)}</span><textarea class="line" id="j-q${i}" data-q="${i}" rows="3" placeholder="Write a few sentences">${esc((store.get('mtc-draft',{})||{})['q'+i]||'')}</textarea></label>`).join('')}
         <div><button class="btn pri" id="j-save">Save entry</button></div>
       </div>
-      <div class="panel"><h3>Your entries</h3>${chart}
+      <div class="jlist"><h3>Your entries</h3>${chart}
         <div>${E.length?E.map(e=>`<div class="entry"><div class="h"><span><b>${esc(fmt(e.date))}</b> <span class="mute">· ${esc(e.type)}</span></span><span class="score">${e.rating}<small style="font-size:15px;color:var(--mute)">/10</small></span></div>
           ${Q.map((q,i)=>e.a&&e.a[i]?`<div><div class="q">${esc(q)}</div><p>${esc(e.a[i])}</p></div>`:'').join('')}<div><button class="linkbtn" data-del="${e.id}">Delete</button></div></div>`).join(''):'<p class="mute" style="margin:0">Your saved entries will show up here, with a chart of how present you stayed over time.</p>'}</div>
         ${E.length?'<div><button class="btn sm" id="j-export">Download my journal</button></div>':''}
@@ -345,12 +357,14 @@ app.addEventListener('click',e=>{
   const d=e.target.closest('[data-done]');
   if(d){const k=d.dataset.done;if(done[k])delete done[k];else done[k]=true;store.set('mtc-done',done);
     const was=!!done[k];route();if(was){const i=ALL.findIndex(l=>l.key===k);toast(ALL[i+1]?'Done. Next lesson is ready when you are.':'Done. That’s every lesson so far.')}return}
+  const ty=e.target.closest('[data-type]');
+  if(ty){jtype=ty.dataset.type;document.querySelectorAll('[data-type]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.type===jtype)));return}
   const s=e.target.closest('.scale button');
   if(s){rating=+s.dataset.v;document.querySelectorAll('.scale button').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.v===rating)));document.getElementById('sdesc').textContent=scaleText(rating);return}
   if(e.target.id==='j-save'){
     if(rating==null){toast('Pick a number from 0 to 10 first.');return}
     const before=new Set(BADGES.filter(b=>b.test()).map(b=>b.id));
-    entries.push({id:Math.random().toString(36).slice(2,10),t:Date.now(),date:document.getElementById('j-date').value||today(),type:document.getElementById('j-type').value,rating,a:Q.map((q,i)=>document.getElementById('j-q'+i).value.trim())});
+    entries.push({id:Math.random().toString(36).slice(2,10),t:Date.now(),date:document.getElementById('j-date').value||today(),type:jtype,rating,a:Q.map((q,i)=>document.getElementById('j-q'+i).value.trim())});
     if(!store.set('mtc-journal',entries)){entries.pop();toast('Your browser blocked saving. Try a normal (not private) window.');return}
     store.set('mtc-draft',{});rating=null;
     const earned=BADGES.filter(b=>b.test()&&!before.has(b.id));
