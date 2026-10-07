@@ -93,6 +93,32 @@ window.KIT = {
     }
   ],
 
+  // ---- Community (Discord) ----
+  // invite:    your Discord invite link (set it to "Never expire")
+  // serverId / channelId: turn on Developer Mode in Discord (Settings → Advanced),
+  //   right-click the server icon → Copy Server ID, right-click a channel → Copy Channel ID.
+  //   With both filled in (and the WidgetBot bot added to your server), a live chat window
+  //   shows up on the website. Leave them empty to only show the Join button.
+  community: {
+    invite: "",
+    serverId: "",
+    channelId: "",
+    intro: "This is where players who take the mental side seriously hang out. Ask me anything, share how your last match went, and learn from players who deal with the same nerves you do.",
+    channels: [
+      ["introduce-yourself", "Who you are, where you play, and what you want to get better at."],
+      ["ask-bendix", "Questions about the mental game. I answer every one."],
+      ["match-reports", "Post your journal rating after a match and what you learned."],
+      ["wins", "Big point you closed out, a routine that clicked, a match you turned around."],
+      ["routines", "Share what you do between points and before serves."]
+    ],
+    rules: [
+      "Be the teammate you’d want. Encourage, don’t judge.",
+      "No selling, spam or self-promotion.",
+      "Keep personal info private. Never share your address, phone number or school schedule.",
+      "Discord is 13+. If you’re under 18, keep chats in the public channels."
+    ]
+  },
+
   // ---- Journal (after every practice or match) ----
   journal: {
     focus: "Staying in the present moment",
