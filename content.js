@@ -99,7 +99,7 @@ window.KIT = {
   //           right-click the server icon → Copy Server ID. Adds an "Open the community"
   //           button for players who already joined.
   community: {
-    invite: "",
+    invite: "https://discord.gg/HkwhBhWC7E",
     serverId: "",
     intro: "This is where players who take the mental side seriously hang out. Ask me anything, share how your last match went, and learn from players who deal with the same nerves you do.",
     channels: [
