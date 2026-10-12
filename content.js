@@ -95,6 +95,7 @@ window.KIT = {
 
   // ---- Community (Discord) ----
   // invite:   your Discord invite link, set to "Never expire" (e.g. "https://discord.gg/abc123")
+  // channels: ["name", "description"]. Add "voice" as a third item for a voice channel.
   // serverId: optional. In Discord turn on Developer Mode (Settings → Advanced),
   //           right-click the server icon → Copy Server ID. Adds an "Open the community"
   //           button for players who already joined.
@@ -103,11 +104,11 @@ window.KIT = {
     serverId: "",
     intro: "This is where players who take the mental side seriously hang out. Ask me anything, share how your last match went, and learn from players who deal with the same nerves you do.",
     channels: [
-      ["introduce-yourself", "Who you are, where you play, and what you want to get better at."],
+      ["introduce-yourself", "Say hi. Who you are, where you play, and what you want to get better at."],
+      ["general", "Everything tennis and the mental game. Match days, tournaments, questions, whatever is on your mind."],
       ["ask-bendix", "Questions about the mental game. I answer every one."],
-      ["match-reports", "Post your journal rating after a match and what you learned."],
       ["wins", "Big point you closed out, a routine that clicked, a match you turned around."],
-      ["routines", "Share what you do between points and before serves."]
+      ["connect-with-others", "Voice chat. Hop in and talk with players who deal with the same nerves you do.", "voice"]
     ],
     rules: [
       "Be the teammate you’d want. Encourage, don’t judge.",
